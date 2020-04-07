@@ -357,7 +357,7 @@ _ratings_list_sql = """
 """
 
 _ratings_list_friends_sql = """
-	SELECT content, rating FROM synchrify_ratings
+	SELECT user, content, rating FROM synchrify_ratings
 	WHERE user IN (
 		SELECT friendee FROM synchrify_friends f
 		WHERE friender = %s AND (
@@ -404,8 +404,8 @@ def get_ratings(user):
 
 
 def get_friends_ratings(user):
-	return [{'content': content_id, 'rating': rating}
-		for content_id, rating in _fetchall(
+	return [{'friend': user, 'content': content_id, 'rating': rating}
+		for user, content_id, rating in _fetchall(
 			_ratings_list_friends_sql,
 			(user,)
 		)
