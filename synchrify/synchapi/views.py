@@ -451,10 +451,12 @@ def spotify_wrapper(request, endpoint):
 	artists = params.get('artists')
 	artists = artists.split(',') if artists else None
 
+	users = params.get('users')
+	users = users.split(',') if users else None
+
 	name = params.get('name')
 	description = params.get('description')
 	playlist = params.get('playlist')
-	users = params.get('users')
 	position = params.get('position')
 	image_b64 = params.get('image')
 
@@ -504,7 +506,7 @@ def spotify_wrapper(request, endpoint):
 			return JsonResponse(client.user_playlist_follow_playlist(username, playlist))
 		elif endpoint == 'is_following_playlist':
 			return JsonResponse(client.user_playlist_is_following(username, playlist, users))
-		elif endpoint == 'add_playlist_track':
+		elif endpoint == 'add_playlist_tracks':
 			return JsonResponse(client.user_playlist_add_tracks(username, playlist, tracks, position))
 		elif endpoint == 'edit_playlist_details':
 			return JsonResponse(client.user_playlist_change_details(username, playlist, name, description=description))
