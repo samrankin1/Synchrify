@@ -151,7 +151,7 @@ def friends_list(request, friend_id=None):
 	return JsonResponse({'friends': friends})
 
 
-def friends_list_all(request):
+def friends_list_friends(request):
 	err = _enforce_method(request, 'GET')
 	if err:
 		return err
@@ -351,7 +351,7 @@ def ratings_list(request, friend_id=None):
 	return JsonResponse({'ratings': ratings})
 
 
-def ratings_list_all(request):
+def ratings_list_friends(request):
 	err = _enforce_method(request, 'GET')
 	if err:
 		return err

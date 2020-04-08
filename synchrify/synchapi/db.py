@@ -395,7 +395,7 @@ def get_rating(user, content):
 
 
 def get_ratings(user):
-	return [{'content': content_id, 'rating': rating}
+	return [{'content_id': content_id, 'rating': rating}
 		for content_id, rating in _fetchall(
 			_ratings_list_sql,
 			(user,)
@@ -404,7 +404,7 @@ def get_ratings(user):
 
 
 def get_friends_ratings(user):
-	return [{'friend': user, 'content': content_id, 'rating': rating}
+	return [{'friend_id': user, 'content_id': content_id, 'rating': rating}
 		for user, content_id, rating in _fetchall(
 			_ratings_list_friends_sql,
 			(user,)

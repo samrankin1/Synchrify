@@ -15,7 +15,7 @@ urlpatterns = [
 
 	path('friends/list', views.friends_list, name='friends-list'),
 	path('friends/list/<int:friend_id>', views.friends_list, name='friends-list-other'),
-	path('friends/list/friends', views.friends_list_all, name='friends-list-all'),
+	path('friends/list/friends', views.friends_list_friends, name='friends-list-all'),
 	path('friends/pending', views.friends_pending, name='friends-pending'),
 	path('friends/add/<int:friend_id>', views.friends_add, name='friends-add'),
 	path('friends/remove/<int:friend_id>', views.friends_remove, name='friends-remove'),
@@ -29,7 +29,7 @@ urlpatterns = [
 
 	path('ratings/list', views.ratings_list, name='ratings-list'),
 	path('ratings/list/<int:friend_id>', views.ratings_list, name='ratings-list-other'),
-	path('ratings/list/friends', views.ratings_list_all, name='ratings-list-all'),
+	path('ratings/list/friends', views.ratings_list_friends, name='ratings-list-all'),
 
 	path('spotify/auth', views.spotify_auth, name='spotify-auth'),
 	path('spotify/auth/callback', views.spotify_auth_callback, name='spotify-auth-callback'),
