@@ -443,8 +443,13 @@ def spotify_wrapper(request, endpoint):
 	timespan = params.get('timespan')
 
 	tracks = params.get('tracks')
+	tracks = tracks.split(',') if tracks else None
+
 	albums = params.get('albums')
+	albums = albums.split(',') if albums else None
+
 	artists = params.get('artists')
+	artists = artists.split(',') if artists else None
 
 	name = params.get('name')
 	description = params.get('description')
