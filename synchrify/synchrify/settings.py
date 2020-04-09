@@ -35,7 +35,6 @@ CORS_ORIGIN_WHITELIST = [
 	'http://localhost:3000',
 	'http://127.0.0.1:3000',
 ]
-CORS_URLS_REGEX = r'^/(?:register|login)/.*$'
 CORS_ALLOW_METHODS = ['POST']
 CORS_ALLOW_CREDENTIALS = True
 
