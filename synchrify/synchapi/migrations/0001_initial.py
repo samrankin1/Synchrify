@@ -42,7 +42,7 @@ create_spotify_auth_sql = """
 	CREATE TABLE synchrify_spotify_auth (
 		user INTEGER PRIMARY KEY,
 		username VARCHAR(50),
-		access_token CHAR(255) NOT NULL,
+		access_token TEXT NOT NULL,
 		refresh_token CHAR(150) NOT NULL,
 		expires_at INTEGER NOT NULL,
 		FOREIGN KEY (user)
