@@ -352,12 +352,16 @@ _content_rating_sql = """
 """
 
 _ratings_list_sql = """
-	SELECT content, rating FROM synchrify_ratings
+	SELECT r.content, c.type, c.uri, c.name, r.rating FROM synchrify_ratings r
+	INNER JOIN synchrify_spotify_content c
+	ON r.content = c.id
 	WHERE user = %s
 """
 
 _ratings_list_friends_sql = """
-	SELECT user, content, rating FROM synchrify_ratings
+	SELECT r.user, r.content, c.type, c.uri, c.name, r.rating FROM synchrify_ratings r
+	INNER JOIN synchrify_spotify_content c
+	ON r.content = c.id
 	WHERE user IN (
 		SELECT friendee FROM synchrify_friends f
 		WHERE friender = %s AND (
@@ -395,8 +399,8 @@ def get_rating(user, content):
 
 
 def get_ratings(user):
-	return [{'content_id': content_id, 'rating': rating}
-		for content_id, rating in _fetchall(
+	return [{'content_id': content_id, 'type': content_type, 'uri': uri, 'name': name, 'rating': rating}
+		for content_id, content_type, uri, name, rating in _fetchall(
 			_ratings_list_sql,
 			(user,)
 		)
@@ -404,8 +408,8 @@ def get_ratings(user):
 
 
 def get_friends_ratings(user):
-	return [{'friend_id': user, 'content_id': content_id, 'rating': rating}
-		for user, content_id, rating in _fetchall(
+	return [{'friend_id': user, 'content_id': content_id, 'type': content_type, 'uri': uri, 'name': name, 'rating': rating}
+		for user, content_id, content_type, uri, name, rating in _fetchall(
 			_ratings_list_friends_sql,
 			(user,)
 		)
