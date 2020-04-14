@@ -120,6 +120,19 @@ def login(request):
 	return _ok()
 
 
+def user(request):
+	err = _enforce_method(request, 'GET')
+	if err:
+		return err
+
+	user = _get_user(request)
+	if not user:
+		return _err('You must be logged in to access this URL')
+
+	spotify_user = db.get_spotify_username(user)
+	return JsonResponse({'user_id': user, 'spotify_user': spotify_user})
+
+
 def logout(request):
 	err = _enforce_method(request, 'GET')
 	if err:

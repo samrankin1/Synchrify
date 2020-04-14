@@ -11,6 +11,7 @@ urlpatterns = [
 	re_path(r'activate/(?P<token>[a-z\d]{8}-[a-z\d]{4}-[a-z\d]{4}-[a-z\d]{4}-[a-z\d]{12})',
 			views.activate, name='activate'),  # Takes activation token (UUIDv4)
 	path('login/', views.login, name='login'),
+	path('user/', views.user, name='user'),
 	path('logout/', views.logout, name='logout'),
 
 	path('friends/list', views.friends_list, name='friends-list'),

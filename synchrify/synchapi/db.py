@@ -241,6 +241,11 @@ _insert_spotify_auth_sql = """
 		expires_at = %(expires)s
 """
 
+_spotify_username_by_id_sql = """
+	SELECT username FROM synchrify_spotify_auth
+	WHERE user = %s
+"""
+
 _spotify_auth_by_id_sql = """
 	SELECT username, access_token, refresh_token, expires_at FROM synchrify_spotify_auth
 	WHERE user = %s
@@ -258,6 +263,14 @@ def insert_spotify_auth(user, auth):
 			'expires': auth.expires_at,
 		}
 	)
+
+
+def get_spotify_username(user):
+	row = _fetchone(
+		_spotify_username_by_id_sql,
+		(user,)
+	)
+	return None if not row else row[0]
 
 
 def get_spotify_auth(user, requests_timeout=None):
